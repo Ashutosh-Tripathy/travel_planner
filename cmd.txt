@@ -1,0 +1,35 @@
+   46  ssh-keygen -t rsa -C "ashutosh_tripathy@outlook.com"# Creates a new ssh key using the provided email
+   47  ssh-keygen -t rsa -C "ashutosh_tripathy@outlook.com"
+   48  cat ~/.ssh/id_rsa.pub
+   49  git config --list
+   50  git
+   56  git config --global --list
+   57  git clone  git@git.toptal.com:Ashutosh-Tripathy/ashutosh-tripathy.git
+   58  ls
+   59  cd ashutosh-tripathy/
+   68  wget -qO- https://deb.nodesource.com/setup_9.x | sudo bash -
+   70  sudo apt-get install -y nodejs 
+   73  nodejs -v
+   74  node -v
+   75  npm -v
+   76  yarn
+   77  npm install yarn
+   78  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+   79  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+   80  sudo apt-get update && sudo apt-get install yarn
+   81  yarn init
+   82  vim package.json 
+   83  yarn add jest
+   84  yarn add babel
+   85  yarn add eslint
+   86  yarn add pm2
+   87  yarn add eslint -D
+   88  vim package.json 
+   89  yarn remove eslint
+   90  cd ashutosh-tripathy/
+   91  yarn remove eslint
+   92  yarn add -D eslint
+   93  yarn add webpack
+   94  yarn remove jest
+   95  yarn add -D jest
+   96  yarn add express
