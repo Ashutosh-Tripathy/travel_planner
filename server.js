@@ -1,11 +1,13 @@
+import logger from 'logger';
 const express = require("express");
-import config from './config';
+
+import config from 'config';
 
 const app = express();
 
-
 app.get('/', (req, res) => {
-   res.send({"test": "application"});
+    logger(4, "New request");
+    res.send({ "test": "application" });
 });
 
 app.listen(config.port, function listenHandler() {
