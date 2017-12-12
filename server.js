@@ -4,13 +4,14 @@ import env from 'server/config/env';
 import router from './server/router/index';
 import db from './server/config/db.js';
 
-const app = express();
+import config from 'config';
 
+const app = express();
 router(app, db);
 
 app.get('/', (req, res) => {
-    logger(4, 'New request');
-    res.send({ 'test': 'application' });
+    logger(4, "New request");
+    res.send({ "test": "application" });
 });
 
 db.sequelize.sync().then(() => {
