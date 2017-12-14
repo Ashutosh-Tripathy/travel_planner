@@ -9,7 +9,9 @@ const sequelize = new Sequelize(env.DATABASE_NAME, env.DATABASE_USERNAME, env.DA
     dialect: env.DATABASE_DIALECT,
     define: {
         underscored: true
-    }
+    },
+    
+    storage: env.DATABASE_PATH
 });
 
 // Connect all the models/tables in the database to a db object,

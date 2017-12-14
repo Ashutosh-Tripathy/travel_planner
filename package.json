@@ -7,7 +7,7 @@
   "author": "Ashutosh Triathy",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_PATH=./ pm2 start --interpreter babel-node server.js --watch",
+    "dev": "NODE_PATH=./ pm2 start --interpreter babel-node index.js --watch",
     "rnd": "NODE_PATH=./ pm2 start --interpreter babel-node db/script.js --watch",
     "start": "npm-run-all --parallel dev",
     "webpack": "webpack -wd",

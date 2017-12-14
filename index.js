@@ -1,10 +1,8 @@
-import logger from 'logger';
+import logger from './server/logging/logger';
 const express = require('express');
 import env from 'server/config/env';
 import router from './server/router/index';
 import db from './server/config/db.js';
-
-import config from 'config';
 
 const app = express();
 router(app, db);

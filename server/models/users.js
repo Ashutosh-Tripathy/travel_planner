@@ -14,7 +14,6 @@ const users = (sequelize, DataTypes) => {
     role: {
       type: DataTypes.ENUM,
       values: ['user', 'admin', 'disabled']
-
     },
     created_at: {
       type: DataTypes.DATE,
