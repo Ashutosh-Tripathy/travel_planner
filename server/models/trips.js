@@ -9,20 +9,20 @@ const trip = (sequelize, DataTypes) => {
     },
     destination: {
       type: DataTypes.STRING,
-      required: true,
+      allowNull: false,
       length: 50,
     },
     startdate: {
       type: DataTypes.DATE,
-      required: true,
+      allowNull: false,
     },
     enddate: {
       type: DataTypes.DATE,
-      required: true,
+      allowNull: false,
     },
     //user_id: {
-//	type: DataTypes.INTEGER, references: users, referencesKey: "id" 
-  //  },
+    //	type: DataTypes.INTEGER, references: users, referencesKey: "id"
+    //  },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false

@@ -8,8 +8,14 @@ const users = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      required: true,
+      allowNull: false,
       length: 50,
+      unique: true
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      length: 100
     },
     role: {
       type: DataTypes.ENUM,

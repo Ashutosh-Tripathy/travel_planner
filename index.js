@@ -6,6 +6,8 @@ import router from './server/router/index';
 import db from './server/config/db.js';
 
 const app = express();
+app.set('superSecret', env.SECRET);
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -17,7 +19,7 @@ router(app, db);
 
 app.get('/', (req, res) => {
     logger(4, "New request");
-    res.send({ "test": "application" });
+    res.send({ "message": "Welcome!" });
 });
 
 db.sequelize.sync().then(() => {

@@ -9,6 +9,10 @@ module.exports = (app, db) => {
         db.users.findAll()
             .then(users => {
                 res.json(users);
+            })
+            .catch(err => {
+                logger(2, err);
+                throw err;
             });
     });
 
@@ -25,17 +29,14 @@ module.exports = (app, db) => {
 
     // POST single user
     app.post('/user', (req, res) => {
-        logger(4, req);
         const id = req.body.id;
         const name = req.body.name;
-        const role = req.body.role;
-        db.users.create({
-            name: name,
-            role: role
-        })
+        const password = req.body.password;
+	const role = req.body.role;
+        db.users.create({name, password, role})
             .then(newuser => {
                 res.json(newuser);
-            })
+            });
     });
 
     // PATCH single user

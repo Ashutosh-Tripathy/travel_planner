@@ -1,6 +1,7 @@
 'use strict'
 
 const routes = [
+    require('./routes/authenticate'),
     require('./routes/users'),
     require('./routes/trips')
 ];

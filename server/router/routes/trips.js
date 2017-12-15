@@ -1,4 +1,5 @@
 'use strict';
+import logger from '../../logging/logger';
 
 module.exports = (app, db) => {
 
@@ -34,6 +35,10 @@ module.exports = (app, db) => {
             .then(newtrip => {
                 res.json(newtrip);
             })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).send('Something broke!');
+            });
     });
 
     // PATCH single trip
