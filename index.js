@@ -1,10 +1,18 @@
 import logger from './server/logging/logger';
-const express = require('express');
+import express from 'express';
+import bodyParser from 'body-parser';
 import env from 'server/config/env';
 import router from './server/router/index';
 import db from './server/config/db.js';
 
 const app = express();
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+    res.header('Content-Type', 'application/json');
+    next();
+});
+
 router(app, db);
 
 app.get('/', (req, res) => {

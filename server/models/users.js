@@ -2,9 +2,9 @@
 const users = (sequelize, DataTypes) => {
   const tbl = sequelize.define('user', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
@@ -13,7 +13,8 @@ const users = (sequelize, DataTypes) => {
     },
     role: {
       type: DataTypes.ENUM,
-      values: ['user', 'admin', 'disabled']
+      defaultValue: 'user',
+      values: ['user', 'manager', 'admin']
     },
     created_at: {
       type: DataTypes.DATE,

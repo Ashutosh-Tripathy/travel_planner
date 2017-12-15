@@ -1,10 +1,11 @@
+import users from './users';
 
 const trip = (sequelize, DataTypes) => {
   const tbl = sequelize.define('trip', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
+      autoIncrement: true
     },
     destination: {
       type: DataTypes.STRING,
@@ -19,11 +20,9 @@ const trip = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       required: true,
     },
-    destination: {
-      type: DataTypes.STRING,
-      required: true,
-      length: 500,
-    },
+    //user_id: {
+//	type: DataTypes.INTEGER, references: users, referencesKey: "id" 
+  //  },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false

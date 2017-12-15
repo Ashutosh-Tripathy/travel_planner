@@ -26,7 +26,10 @@ db.users = users(sequelize, Sequelize);
 db.trips = trips(sequelize, Sequelize);
 
 //Relations
-db.trips.belongsTo(db.users);
-db.users.hasMany(db.trips);
+//Task.belongsTo(User, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+//User.hasMany(Task, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+
+db.trips.belongsTo(db.users, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+db.users.hasMany(db.trips, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 
 module.exports = db;
