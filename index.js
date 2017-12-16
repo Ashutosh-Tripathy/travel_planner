@@ -3,17 +3,22 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import env from 'server/config/env';
 import router from './server/router/index';
-import db from './server/config/db.js';
+import db from './server/config/db';
+import verifytoken from './server/middleware/verifytoken';
+import authorize from './server/middleware/authorize';
 
 const app = express();
 app.set('superSecret', env.SECRET);
 
 app.use(bodyParser.json());
-
 app.use((req, res, next) => {
     res.header('Content-Type', 'application/json');
     next();
 });
+app.use(verifytoken);
+
+app.use("/user*", authorize("admin", "manager"));
+app.use("/trip*", authorize("admin"));
 
 router(app, db);
 
@@ -27,3 +32,4 @@ db.sequelize.sync().then(() => {
         console.info('Running on: ' + env.PORT);
     })
 });
+

@@ -9,7 +9,7 @@ module.exports = (app, db) => {
     app.get('/users', (req, res) => {
         db.users.findAll()
             .then(users => {
-                res.json(users);
+                res.status(200).json(users);
             })
             .catch(err => {
                 logger(2, err);
@@ -21,10 +21,11 @@ module.exports = (app, db) => {
     app.get('/user/:id', (req, res) => {
         const id = req.params.id;
         db.users.find({
-            where: { id: id }
+            where: { id: id },
+            attributes: { exclude: ['password'] }
         })
             .then(user => {
-                res.json(user);
+                res.status(200).json(user);
             });
     });
 
@@ -36,10 +37,10 @@ module.exports = (app, db) => {
         const role = req.body.role;
         bcrypt.hash(textpassword, saltRounds)
             .then(password => {
-		logger(2, "Hash created: " + password);
+                logger(2, "Hash created: " + password);
                 db.users.create({ name, password, role })
                     .then(newuser => {
-                        res.json(newuser);
+                        res.status(200).json(newuser);
                     });
             });
     });
@@ -55,7 +56,7 @@ module.exports = (app, db) => {
                 return user.updateAttributes(updates)
             })
             .then(updateduser => {
-                res.json(updateduser);
+                res.status(200).json(updateduser);
             });
     });
 
@@ -66,7 +67,7 @@ module.exports = (app, db) => {
             where: { id: id }
         })
             .then(deleteduser => {
-                res.json(deleteduser);
+                res.status(200).json(deleteduser);
             });
     });
 };
