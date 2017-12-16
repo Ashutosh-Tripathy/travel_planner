@@ -1,6 +1,7 @@
 'use strict';
+import bcrypt from 'bcrypt';
 import logger from '../../logging/logger';
-
+const saltRounds = 2;
 
 module.exports = (app, db) => {
 
@@ -31,11 +32,15 @@ module.exports = (app, db) => {
     app.post('/user', (req, res) => {
         const id = req.body.id;
         const name = req.body.name;
-        const password = req.body.password;
-	const role = req.body.role;
-        db.users.create({name, password, role})
-            .then(newuser => {
-                res.json(newuser);
+        const textpassword = req.body.password;
+        const role = req.body.role;
+        bcrypt.hash(textpassword, saltRounds)
+            .then(password => {
+		logger(2, "Hash created: " + password);
+                db.users.create({ name, password, role })
+                    .then(newuser => {
+                        res.json(newuser);
+                    });
             });
     });
 
