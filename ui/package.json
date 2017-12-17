@@ -4,8 +4,8 @@
   "description": "Hacker earth shopping card code challange",
   "scripts": {
     "prestart": "babel-node tools/startMessage.js",
-    "start": "npm-run-all --parallel open:src",
-    "open:src": "babel-node tools/srcServer.js",
+    "start": "npm-run-all --parallel dev",
+    "dev": "pm2 start --interpreter babel-node tools/srcServer.js --watch",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
@@ -17,6 +17,7 @@
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
     "jquery": "2.2.3",
+    "pm2": "^2.9.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-redux": "4.4.5",
@@ -64,5 +65,5 @@
     "webpack": "1.13.0",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
-  }  
+  }
 }

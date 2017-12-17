@@ -3,10 +3,10 @@ import bcrypt from 'bcrypt';
 import logger from '../../logging/logger';
 const saltRounds = 2;
 
-module.exports = (app, db) => {
+module.exports = (router, db) => {
 
     // GET all users
-    app.get('/users', (req, res) => {
+    router.get('/users', (req, res) => {
         db.users.findAll()
             .then(users => {
                 res.status(200).json(users);
@@ -18,7 +18,7 @@ module.exports = (app, db) => {
     });
 
     // GET one user by id
-    app.get('/user/:id', (req, res) => {
+    router.get('/user/:id', (req, res) => {
         const id = req.params.id;
         db.users.find({
             where: { id: id },
@@ -30,7 +30,7 @@ module.exports = (app, db) => {
     });
 
     // POST single user
-    app.post('/user', (req, res) => {
+    router.post('/user', (req, res) => {
         const id = req.body.id;
         const name = req.body.name;
         const textpassword = req.body.password;
@@ -46,7 +46,7 @@ module.exports = (app, db) => {
     });
 
     // PATCH single user
-    app.patch('/user/:id', (req, res) => {
+    router.patch('/user/:id', (req, res) => {
         const id = req.params.id;
         const updates = req.body.updates;
         db.users.find({
@@ -61,7 +61,7 @@ module.exports = (app, db) => {
     });
 
     // DELETE single user
-    app.delete('/user/:id', (req, res) => {
+    router.delete('/user/:id', (req, res) => {
         const id = req.params.id;
         db.users.destroy({
             where: { id: id }

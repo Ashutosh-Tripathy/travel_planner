@@ -8,10 +8,10 @@ const routes = [
 
 
 // Add access to the app and db objects to each route
-const router = (app, db) => {
+const app_router = (router, db) => {
     return routes.forEach((route) => {
-        route(app, db);
+        route(router, db);
     });
 };
 
-export default router;
+export default app_router;

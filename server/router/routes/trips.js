@@ -1,10 +1,10 @@
 'use strict';
 import logger from '../../logging/logger';
 
-module.exports = (app, db) => {
+module.exports = (router, db) => {
 
     // GET all trips
-    app.get('/trips', (req, res) => {
+    router.get('/trips', (req, res) => {
         db.trips.findAll()
             .then(trips => {
                 res.json(trips);
@@ -12,7 +12,7 @@ module.exports = (app, db) => {
     });
 
     // GET one trip by id
-    app.get('/trip/:id', (req, res) => {
+    router.get('/trip/:id', (req, res) => {
         const id = req.params.id;
         db.trips.find({
             where: { id: id }
@@ -23,7 +23,7 @@ module.exports = (app, db) => {
     });
 
     // POST single trip
-    app.post('/trip', (req, res) => {
+    router.post('/trip', (req, res) => {
         const id = req.body.id;
         const destination = req.body.destination;
         const startdate = req.body.startdate;
@@ -42,7 +42,7 @@ module.exports = (app, db) => {
     });
 
     // PATCH single trip
-    app.patch('/trip/:id', (req, res) => {
+    router.patch('/trip/:id', (req, res) => {
         const id = req.params.id;
         const updates = req.body.updates;
         db.trips.find({
@@ -57,7 +57,7 @@ module.exports = (app, db) => {
     });
 
     // DELETE single trip
-    app.delete('/trip/:id', (req, res) => {
+    router.delete('/trip/:id', (req, res) => {
         const id = req.params.id;
         db.trips.destroy({
             where: { id: id }

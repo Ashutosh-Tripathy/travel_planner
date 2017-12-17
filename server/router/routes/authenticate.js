@@ -16,9 +16,9 @@ const saltRounds = 2;
 
 
 
-module.exports = (app, db) => {
+module.exports = (router, db) => {
   // Post authenticate
-  app.post('/authenticate', (req, res) => {
+  router.post('/authenticate', (req, res) => {
     db.users.findOne({ where: { id: req.body.id } })
       .then(user => {
         if (!user) {
@@ -39,7 +39,7 @@ module.exports = (app, db) => {
                   role: user.role
                 };
 
-                var token = jwt.sign(payload, app.get('superSecret'), {
+                var token = jwt.sign(payload, router.get('superSecret'), {
                   expiresIn: 30 * 24 * 60 * 60 // expires in 24 hours
                 });
 
