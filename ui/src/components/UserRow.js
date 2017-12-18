@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 const UserRow = ({ user, onDeleteUser }) => {
     return (
         <tr>
-            <td><label>{user.id}</label></td>
+            <td><label>{user.name}</label></td>
             <td><label>{user.role}</label></td>
             <td><input type="button" className="btn btn-sm btn-danger" value="remove" id={user.id} onClick={onDeleteUser} /></td>
         </tr>
