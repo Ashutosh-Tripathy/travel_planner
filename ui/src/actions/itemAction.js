@@ -13,7 +13,8 @@ export function loadItems() {
         return itemApi.getAllItems().then(items => {
             dispatch(loadItemsSuccess(items));
         }).catch(error => {
-            throw (error);
+            logger(0, err);
+            res.status(500).json({ message: 'Unsuccessful, Please try again.' });
         });
     };
 }

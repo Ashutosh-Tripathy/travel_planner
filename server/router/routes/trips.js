@@ -7,7 +7,7 @@ module.exports = (router, db) => {
     router.get('/trips', (req, res) => {
         db.trips.findAll()
             .then(trips => {
-                res.json(trips);
+                res.status(200).json(trips);
             });
     });
 
@@ -18,7 +18,7 @@ module.exports = (router, db) => {
             where: { id: id }
         })
             .then(trip => {
-                res.json(trip);
+                res.status(200).json(trip);
             });
     });
 
@@ -33,11 +33,11 @@ module.exports = (router, db) => {
             id, destination, startdate, enddate, user_id
         })
             .then(newtrip => {
-                res.json(newtrip);
+                res.status(200).json(newtrip);
             })
             .catch(err => {
                 logger(0, err);
-                res.status(500).send('Something broke!');
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 
@@ -52,7 +52,7 @@ module.exports = (router, db) => {
                 return trip.updateAttributes(updates)
             })
             .then(updatedtrip => {
-                res.json(updatedtrip);
+                res.status(200).json(updatedtrip);
             });
     });
 
@@ -63,7 +63,7 @@ module.exports = (router, db) => {
             where: { id: id }
         })
             .then(deletedtrip => {
-                res.json(deletedtrip);
+                res.status(200).json(deletedtrip);
             });
     });
 };

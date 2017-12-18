@@ -12,8 +12,8 @@ module.exports = (router, db) => {
                 res.status(200).json(users);
             })
             .catch(err => {
-                logger(2, err);
-                throw err;
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 

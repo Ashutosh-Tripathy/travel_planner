@@ -9,11 +9,11 @@ import { Provider } from 'react-redux';
 import routes from './routes';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { loadItems } from './actions/itemAction';
+import { loadUsers } from './actions/userAction';
 import '../node_modules/toastr/build/toastr.min.css';
 
 const store = configureStore();
-store.dispatch(loadItems());
+store.dispatch(loadUsers());
 // store.dispatch(loadCourses());
 // store.dispatch(loadAuthors());
 
@@ -22,4 +22,4 @@ render(
         <Router history={browserHistory} routes={routes} />
     </Provider >,
     document.getElementById('app')
-); 
+);

@@ -22,13 +22,13 @@ module.exports = (router, db) => {
     db.users.findOne({ where: { id: req.body.id } })
       .then(user => {
         if (!user) {
-          res.status(401).json({ success: false, message: 'Authentication failed. User not found.' });
+          res.status(401).json({ success: false, message: 'Invalid username/password.' });
         } else if (user) {
 
           bcrypt.compare(req.body.password, user.password)
             .then(response => {
               if (!response) {
-                res.status(401).json({ success: false, message: 'Authentication failed. Wrong password.' });
+                res.status(401).json({ success: false, message: 'Invalid username/password.' });
               }
               else {
                 // if user is found and password is right
