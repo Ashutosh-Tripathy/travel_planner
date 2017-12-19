@@ -8,13 +8,16 @@ export function loadUsersSuccess(users) {
     return { type: types.LOAD_USERS_SUCCESS, users };
 }
 
+export function loadUserSuccess(user) {
+    return { type: types.LOAD_USER_SUCCESS, user };
+}
 
 export function deleteUserSuccess(users) {
     return { type: types.DELETE_USER_SUCCESS, users };
 }
 
 
-export function loadUsers() {
+export function getUsers() {
     return function (dispatch, getState) {
         var state = getState();
         var url = "http://52.230.121.175/api/users";
@@ -36,6 +39,30 @@ export function loadUsers() {
             });
     }
 }
+
+//export function getUser(id) {
+//    return function (dispatch, getState) {
+//        var state = getState();
+//        var url = "http://52.230.121.175/api/user/" + id;
+//        dispatch(beginAjaxCall());
+//        return fetch(url)
+//            .then(function (result) {
+//                if (result.status === 200) {
+//                    return result.json();
+//                }
+//                throw "request failed";
+//            })
+//            .then(function (jsonResult) {
+//                dispatch(loadUserSuccess(jsonResult));
+//            })
+//            .catch(function (err) {
+//                dispatch(ajaxCallError());
+//                throw (err);
+//                // sweetAlert("Oops...", "Couldn't fetch repos for user: " + state.user, "error");
+//            });
+//    }
+//}
+
 
 export function deleteUser(id, users) {
     //    let id = event.target.id;

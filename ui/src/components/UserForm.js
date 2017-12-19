@@ -3,13 +3,13 @@ import TextInput from './common/TextInput';
 import SelectInput from './common/SelectInput';
 import PasswordInput from './common/PasswordInput';
 
-const UserForm = ({ user, allAuthors, onSave, onChange, saving, errors }) => {
+const UserForm = ({ user, allAuthors, onSave, saving, errors }) => {
     return (
         <form>
             <h1>Manage User</h1>
             <div className="col-md-6 col-lg-6">
                 <TextInput name="name" label="Name" value={user.name}
-                    onChange={onChange} error={errors.title} />
+                    error={errors.title} />
 
                 <SelectInput name="role" label="Role" value={user.role}
                     defaultOption="Select Role" options={[{ value: 'user', text: 'User' }, { value: 'manager', text: 'Manager' }, { value: 'admin', text: 'Admin' }]}

@@ -9,6 +9,7 @@ module.exports = (router, db) => {
     router.get('/users', (req, res) => {
         db.users.findAll()
             .then(users => {
+		users.map(user => user.password = '');
                 res.status(200).json(users);
             })
             .catch(err => {
@@ -21,10 +22,11 @@ module.exports = (router, db) => {
     router.get('/user/:id', (req, res) => {
         const id = req.params.id;
         db.users.find({
-            where: { id: id },
-            attributes: { exclude: ['password'] }
+            where: { id: id }
+            //attributes: { exclude: ['password'] }
         })
             .then(user => {
+		if(user) user.password = '';
                 res.status(200).json(user);
             });
     });
@@ -37,9 +39,9 @@ module.exports = (router, db) => {
         const role = req.body.role;
         bcrypt.hash(textpassword, saltRounds)
             .then(password => {
-                logger(2, "Hash created: " + password);
                 db.users.create({ name, password, role })
                     .then(newuser => {
+			newuser.password = '';
                         res.status(200).json(newuser);
                     });
             });
