@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import UserList from './UserList';
 import toastr from 'toastr';
+import * as userAction from '../actions/userAction';
 toastr.options.preventDuplicates = true;
 
 class User extends React.Component {
@@ -17,15 +18,22 @@ class User extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState(() => ({ users: nextProps.users}));
+        this.setState(() => ({ users: nextProps.users }));
     }
 
     deleteUser(event) {
         let id = event.target.id;
-        toastr.success('User deleted successfuly');
-        return this.setState((prevState, props) => {
-            return { users: JSON.parse(JSON.stringify(prevState.users)).filter(user => user.id != id) };
-        });
+        let users = Object.assign({}, this.state.users);
+        this.props.actions.deleteUser(id, users)
+            .catch((error) => {
+                toastr.error(error);
+                this.setState({ saving: false });
+            });
+        // this.state.dispatch(deleteUser(id));
+        // toastr.success('User deleted successfuly');
+        // return this.setState((prevState, props) => {
+        //     return { users: prevState.users.filter(user => user.id != id) };
+        // });
     }
 
     render() {
@@ -60,6 +68,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        actions: bindActionCreators(userAction, dispatch)
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(User);
