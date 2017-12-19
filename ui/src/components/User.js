@@ -15,10 +15,15 @@ class User extends React.Component {
         };
         this.initialState = { users: [] };
         this.deleteUser = this.deleteUser.bind(this);
+        this.redirectToAddUserPage = this.redirectToAddUserPage.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState(() => ({ users: nextProps.users }));
+    }
+
+    redirectToAddUserPage() {
+        browserHistory.push('/user');
     }
 
     deleteUser(event) {
@@ -42,6 +47,7 @@ class User extends React.Component {
             <div>
                 <div>
                     <h1>Users</h1>
+                    <input type="submit" value="Add User" className="btn btn-primary" onClick={this.redirectToAddUserPage} />
                 </div>
                 <div className="row">
                     <div className="col-sm-8 col-md-8 col-lg-8">{<UserList users={users} onDeleteUser={this.deleteUser} />}</div>
