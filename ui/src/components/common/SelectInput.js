@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 
-const SelectInput = ({ name, label, defaultOption, value, error, options }) => {
+const SelectInput = ({ name, label, onChange, defaultOption, value, error, options }) => {
     return (
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <div className="field">
                 <select name={name}
-                    value={value}  className="form-control">
-                    <option value="">{defaultOption}</option>
+                    value={value} onChange={onChange} className="form-control">
+                    <option value="">"Select role"</option>
                     {options.map(option => {
                         return <option key={option.value} value={option.value}>{option.text}</option>;
 

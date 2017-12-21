@@ -33,6 +33,29 @@ class UserApi {
             }, delay);
         });
     }
+
+    static saveUser(user) {
+        user = Object.assign({}, user); // to avoid manipulating object passed in.
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // Simulate server-side validation
+                const minUserTitleLength = 1;
+                if (user.name.length < 1) {
+                    reject(`Title must be at least 1 characters.`);
+                }
+                if (user.id) {
+                    const existingUserIndex = users.findIndex(a => a.id == user.id);
+                    users.splice(existingUserIndex, 1, user);
+                } else {
+                    //Just simulating creation here.
+                    //The server would generate ids and watchHref's for new users in a real app.
+                    //Cloning so copy returned is passed by value rather than by reference.
+                    users.push(user);
+                }
+                resolve(user);
+            }, delay);
+        });
+    }
 }
 
 export default UserApi;

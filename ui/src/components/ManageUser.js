@@ -12,7 +12,7 @@ class ManageUser extends React.Component {
         this.state = {
             user: Object.assign({}, this.props.user),
         };
-//        this.updateUserState = this.updateUserState.bind(this);
+        this.updateUserState = this.updateUserState.bind(this);
         this.saveUser = this.saveUser.bind(this);
     }
 
@@ -22,12 +22,12 @@ class ManageUser extends React.Component {
         }
     }
 
-//    updateUserState(event) {
-//        const field = event.target.name;
-//        let user = Object.assign({}, this.state.user);
-//        user[field] = event.target.value;
-//        return this.setState({ user: user });
-//    }
+    updateUserState(event) {
+        const field = event.target.name;
+        let user = Object.assign({}, this.state.user);
+        user[field] = event.target.value;
+        return this.setState({ user: user });
+    }
 
     saveUser(event) {
         event.preventDefault();
@@ -42,7 +42,6 @@ class ManageUser extends React.Component {
 
     redirect() {
         this.setState({ saving: false });
-        toastr.success('User saved');
         this.context.router.push('/users');
     }
 
@@ -61,7 +60,6 @@ ManageUser.propTypes = {
 };
 
 function getUserById(users, id) {
-    debugger;
     const user = users.filter(user => user.id == id);
     if (user.length) return user[0];
     return null;
@@ -78,7 +76,7 @@ function mapStateToProps(state, ownProps) {
     if (userId && state.users.length) {
         user = getUserById(state.users, userId) || user;
     }
-    
+
     return {
         user: user,
     };

@@ -6,11 +6,19 @@ export default function userReducer(state = initialState.users, action) {
         case types.LOAD_USERS_SUCCESS:
             return action.users;
 
-	case types.LOAD_USER_SUCCESS:
+        case types.LOAD_USER_SUCCESS:
             return action.user;
- 
+
         case types.DELETE_USER_SUCCESS:
             return action.users;
+
+        case types.UPDATE_USER_SUCCESS:
+            return action.users;
+
+        case types.CREATE_USER_SUCCESS:
+            return action.users;
+
+
 
         default:
             return state;

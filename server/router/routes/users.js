@@ -21,7 +21,8 @@ module.exports = (router, db) => {
     // GET one user by id
     router.get('/user/:id', (req, res) => {
         const id = req.params.id;
-        db.users.find({
+        logger(2, `Get user: ${id}`);
+       db.users.find({
             where: { id: id }
             //attributes: { exclude: ['password'] }
         })
@@ -37,7 +38,9 @@ module.exports = (router, db) => {
         const name = req.body.name;
         const textpassword = req.body.password;
         const role = req.body.role;
-        bcrypt.hash(textpassword, saltRounds)
+	logger(2, `Patch user: ${id}, name: ${name}, password: ${textpassword}, role: ${role}`);
+
+	 bcrypt.hash(textpassword, saltRounds)
             .then(password => {
                 db.users.create({ name, password, role })
                     .then(newuser => {
@@ -50,21 +53,34 @@ module.exports = (router, db) => {
     // PATCH single user
     router.patch('/user/:id', (req, res) => {
         const id = req.params.id;
-        const updates = req.body.updates;
-        db.users.find({
-            where: { id: id }
-        })
-            .then(user => {
-                return user.updateAttributes(updates)
-            })
-            .then(updateduser => {
-                res.status(200).json(updateduser);
+	const name = req.body.name;
+        const textpassword = req.body.password;
+        const role = req.body.role;
+	logger(2, `Patch user: ${id}, name: ${name}, password: ${textpassword}, role: ${role}`);
+	logger(2, req.body);
+	if (textpassword){
+	bcrypt.hash(textpassword, saltRounds)
+            .then(password => {
+                db.users.update({ name, password, role }, { where: { id: id } })
+                    .then(updatedUser => {
+                        updatedUser.password = '';
+                        res.status(200).json(updatedUser);
+                    });
             });
+	} else {
+		db.users.update({ name, role }, { where: { id: id } })
+                    .then(updatedUser => {
+                        updatedUser.password = '';
+                        res.status(200).json(updatedUser);
+                    });	
+        }
+
     });
 
     // DELETE single user
     router.delete('/user/:id', (req, res) => {
         const id = req.params.id;
+	logger(2, `Delete user: ${id}`);
         db.users.destroy({
             where: { id: id }
         })
