@@ -169,8 +169,9 @@ export function saveUser(user) {
                 })
                 .then(function (jsonResult) {
                     debugger;
-                    state.users.push(jsonResult);
-                    dispatch(createUserSuccess(state.users));
+		    let users = JSON.parse(JSON.stringify(state.users));
+                    users.push(jsonResult);
+                    dispatch(createUserSuccess(users));
                     toastr.success('Successfuly created user.');
 
                     // dispatch(deleteUserSuccess(jsonResult));

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import UserList from './UserList';
 import toastr from 'toastr';
-import * as userAction from '../actions/userAction';
+import * as userAction from '../../actions/userAction';
 toastr.options.preventDuplicates = true;
 
 class User extends React.Component {

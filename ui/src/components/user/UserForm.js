@@ -1,7 +1,7 @@
 import React from 'react';
-import TextInput from './common/TextInput';
-import SelectInput from './common/SelectInput';
-import PasswordInput from './common/PasswordInput';
+import TextInput from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
+import PasswordInput from '../common/PasswordInput';
 
 const UserForm = ({ user, onSave, onChange, saving, errors }) => {
     return (

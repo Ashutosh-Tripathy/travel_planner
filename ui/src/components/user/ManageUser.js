@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as userAction from '../actions/userAction';
+import * as userAction from '../../actions/userAction';
 import UserList from './UserList';
 import UserForm from './UserForm';
 import toastr from 'toastr';
