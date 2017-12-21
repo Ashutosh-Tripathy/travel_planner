@@ -8,12 +8,17 @@ module.exports = (router, db) => {
         db.trips.findAll()
             .then(trips => {
                 res.status(200).json(trips);
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 
     // GET one trip by id
     router.get('/trip/:id', (req, res) => {
         const id = req.params.id;
+        logger(2, `Get trip: ${id}`);
         db.trips.find({
             where: { id: id }
         })
@@ -24,13 +29,12 @@ module.exports = (router, db) => {
 
     // POST single trip
     router.post('/trip', (req, res) => {
-        const id = req.body.id;
         const destination = req.body.destination;
         const startdate = req.body.startdate;
         const enddate = req.body.enddate;
         const user_id = req.body.user_id;
         db.trips.create({
-            id, destination, startdate, enddate, user_id
+            destination, startdate, enddate, user_id
         })
             .then(newtrip => {
                 res.status(200).json(newtrip);
@@ -44,7 +48,7 @@ module.exports = (router, db) => {
     // PATCH single trip
     router.patch('/trip/:id', (req, res) => {
         const id = req.params.id;
-        const updates = req.body.updates;
+        const updates = req.body;
         db.trips.find({
             where: { id: id }
         })

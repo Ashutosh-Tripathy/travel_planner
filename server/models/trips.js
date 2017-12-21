@@ -13,12 +13,14 @@ const trip = (sequelize, DataTypes) => {
       length: 50,
     },
     startdate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
+      defaultValue: DataTypes.NOW 
     },
     enddate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
+      defaultValue: DataTypes.NOW 
     },
     //user_id: {
     //	type: DataTypes.INTEGER, references: users, referencesKey: "id"
