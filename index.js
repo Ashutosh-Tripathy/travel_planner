@@ -16,10 +16,11 @@ app.use((req, res, next) => {
     res.header('Content-Type', 'application/json');
     next();
 });
-//app.use(verifytoken);
 
-app.use("/user*", authorize("admin", "manager"));
-app.use("/trip*", authorize("admin"));
+app.use(verifytoken);
+app.use(authorize);
+//app.use("/user*", authorize("admin", "manager"));
+//app.use("/trip*", authorize("admin"));
 
 app_router(router, db);
 

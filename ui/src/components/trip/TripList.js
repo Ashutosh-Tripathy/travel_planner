@@ -10,6 +10,7 @@ const TripList = ({ trips, onDeleteTrip }) => {
                         <th>Destination</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+			<th>Days remaining</th>
                     </tr>
                 </thead>
                 <tbody>

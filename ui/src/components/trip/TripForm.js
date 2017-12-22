@@ -1,6 +1,8 @@
 import React from 'react';
 import TextInput from '../common/TextInput';
+import DateInput from '../common/DateInput';
 import SelectInput from '../common/SelectInput';
+import NumberInput from '../common/NumberInput';
 
 const TripForm = ({ trip, onSave, onChange, saving, errors }) => {
     return (
@@ -10,12 +12,16 @@ const TripForm = ({ trip, onSave, onChange, saving, errors }) => {
                 <TextInput name="destination" label="Destination" value={trip.destination} onChange={onChange}
                     error={errors.title} />
 
-                <TextInput name="startdate" label="Start Date" value={trip.startdate}
+                <DateInput name="startdate" label="Start Date" value={trip.startdate}
                     defaultOption="Select Start Date" onChange={onChange} options={[{ value: 'trip', text: 'Trip' }, { value: 'manager', text: 'Manager' }, { value: 'admin', text: 'Admin' }]}
                     error={errors.authorId} />
 
-                <TextInput name="enddate" label="End Date" value={trip.enddate} onChange={onChange}
+                <DateInput name="enddate" label="End Date" value={trip.enddate} onChange={onChange}
                     defaultOption="End Date" error={errors.authorId} />
+
+		<NumberInput name="user_id" label="User id" value={trip.user_id} onChange={onChange}
+			defaultOption="End Date" error={errors.authorId} readonly={trip.user_id > 0} />
+    
                 <input
                     type="submit" disabled={saving} value={saving ? 'saving...' : 'Save'}
                     className="btn btn-primary"

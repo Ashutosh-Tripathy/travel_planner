@@ -37,11 +37,12 @@ module.exports = (router, db) => {
                 // if user is found and password is right
                 // create a token with only our given payload
                 // we don't want to pass in the entire user since that has the password
+
                 const payload = {
                   id: user.id,
                   role: user.role
                 };
-
+		logger(4, `Payload: ${JSON.stringify(payload)}`);
                 var token = jwt.sign(payload, SECRET, {
                   expiresIn: 30 * 24 * 60 * 60 // expires in 24 hours
                 });

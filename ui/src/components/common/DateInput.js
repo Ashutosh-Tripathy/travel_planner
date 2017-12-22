@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const TextInput = ({ name, label, onChange, value, error, readonly = false }) => {
+const DateInput = ({ name, label, onChange, value, error }) => {
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
         wrapperClass += " " + 'has-error';
@@ -9,15 +9,15 @@ const TextInput = ({ name, label, onChange, value, error, readonly = false }) =>
         <div className={wrapperClass}>
             <label htmlFor={name}>{label}</label>
             <div className="field">
-                <input type="text" name={name} className="form-controli" onChange={onChange}
-                    value={value} readonly={readonly}
+                <input type="Date" name={name} className="form-controli" onChange={onChange}
+                    value={value}
                 />
             </div>
         </div>
     );
 };
 
-TextInput.PropTypes = {
+DateInput.PropTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -25,4 +25,4 @@ TextInput.PropTypes = {
     error: PropTypes.string
 };
 
-export default TextInput;
+export default DateInput;
