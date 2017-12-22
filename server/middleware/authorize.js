@@ -8,9 +8,11 @@ export default function permit(...allowed) {
   return (req, res, next) => {
     if (isAllowed(req.role)) { 
       next(); // role is allowed, so continue on the next middleware
-    } else if (req.path.toLowerCase().startsWith('user') && (req.params.id || req.body.id) == req.userId) {
-      next();
-    } else if (req.path.toLowerCase().startsWith('trip')) {
+    } 
+	//else if (req.path.toLowerCase().startsWith('user') && (req.params.id || req.body.id) == req.userId) {
+//      next();
+//    }
+ else if (req.path.toLowerCase().startsWith('trip')) {
       next();
     }
  else {

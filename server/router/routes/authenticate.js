@@ -2,6 +2,8 @@
 import logger from '../../logging/logger';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import {SECRET} from '../../config/env';
+
 const saltRounds = 2;
 
 
@@ -19,16 +21,17 @@ const saltRounds = 2;
 module.exports = (router, db) => {
   // Post authenticate
   router.post('/authenticate', (req, res) => {
-    db.users.findOne({ where: { id: req.body.id } })
+    logger(2, `Authenticate user: ${req.body.username}`);
+    db.users.findOne({ where: { name: req.body.username } })
       .then(user => {
         if (!user) {
-          res.status(401).json({ success: false, message: 'Invalid username/password.' });
+	  res.status(400).json({ success: false, message: 'Invalid username/password.' });
         } else if (user) {
 
           bcrypt.compare(req.body.password, user.password)
             .then(response => {
               if (!response) {
-                res.status(401).json({ success: false, message: 'Invalid username/password.' });
+                res.status(400).json({ success: false, message: 'Invalid username/password.' });
               }
               else {
                 // if user is found and password is right
@@ -39,7 +42,7 @@ module.exports = (router, db) => {
                   role: user.role
                 };
 
-                var token = jwt.sign(payload, router.get('superSecret'), {
+                var token = jwt.sign(payload, SECRET, {
                   expiresIn: 30 * 24 * 60 * 60 // expires in 24 hours
                 });
 

@@ -1,6 +1,8 @@
 'use strict';
 import logger from '../logging/logger';
 import jwt from 'jsonwebtoken';
+import {secret} from '../config/env';
+
 
 var unsecured_path = ['/authenticate'];
 function verifyToken(req, res, next) {
@@ -11,7 +13,7 @@ function verifyToken(req, res, next) {
     logger(4, "Verifying token");
     if (!token)
       res.status(403).json({ auth: false, message: 'No token provided.' });
-    jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+    jwt.verify(token, secret, function (err, decoded) {
       if (err)
         res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
       // if everything good, save to request for use in other routes

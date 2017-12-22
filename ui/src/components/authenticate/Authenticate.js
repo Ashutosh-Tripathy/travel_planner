@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import toastr from 'toastr';
-import * as userAction from '../../actions/userAction';
+import * as authenticateUserAction from '../../actions/authenticateUserAction';
 import TextInput from '../common/TextInput';
 import PasswordInput from '../common/PasswordInput';
 
@@ -25,6 +25,7 @@ class Authenticate extends React.Component {
     }
 
     redirectToTripsrPage() {
+	this.setState({ saving: false });
         browserHistory.push('/trips');
     }
 
@@ -39,8 +40,8 @@ class Authenticate extends React.Component {
     authenticateUser(event) {
         event.preventDefault();
         this.setState({ saving: true });
-        this.props.actions.saveUser(this.state.authenticateUser)
-            .then(() => this.redirect())
+        this.props.actions.authenticateUser(this.state.authenticateUser)
+            .then(() => this.redirectToTripsrPage())
             .catch((error) => {
                 toastr.error(error);
                 this.setState({ saving: false });
@@ -86,7 +87,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(userAction, dispatch)
+        actions: bindActionCreators(authenticateUserAction, dispatch)
 
     };
 }
