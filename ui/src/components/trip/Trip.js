@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import TripList from './TripList';
 import toastr from 'toastr';
 import * as tripAction from '../../actions/tripAction';
-import { getToken } from '../../actions/localStoreAction';
+
 
 toastr.options.preventDuplicates = true;
 
@@ -18,7 +18,6 @@ class Trip extends React.Component {
         this.initialState = { trips: [] };
         this.deleteTrip = this.deleteTrip.bind(this);
         this.redirectToAddTripPage = this.redirectToAddTripPage.bind(this);
-        toastr.success(getToken());
     }
 
     componentWillReceiveProps(nextProps) {

@@ -34,4 +34,3 @@ db.sequelize.sync().then(() => {
         console.info('Running on: ' + env.PORT);
     })
 });
-

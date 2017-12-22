@@ -7,6 +7,7 @@ module.exports = (router, db) => {
 
     // GET all users
     router.get('/users', (req, res) => {
+	logger(2, `Token: ${req.headers['x-access-token']}`);
         db.users.findAll()
             .then(users => {
                 users.map(user => user.password = '');

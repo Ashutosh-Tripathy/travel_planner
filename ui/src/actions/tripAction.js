@@ -3,6 +3,13 @@ import * as types from './actionTypes';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 import toastr from 'toastr';
 import { ucs2 } from 'punycode';
+import { getToken } from '../actions/localStoreAction';
+
+const headers = {
+    'x-access-token': getToken(), 'Accept': 'application/json',
+    'Content-Type': 'application/json'
+};
+
 // import { start } from 'repl';
 
 
@@ -32,7 +39,7 @@ export function getTrips() {
         var state = getState();
         var url = "http://52.230.121.175/api/trips";
         dispatch(beginAjaxCall());
-        return fetch(url)
+        return fetch(url, { headers })
             .then(function (result) {
                 if (result.status === 200) {
                     return result.json();
@@ -50,29 +57,6 @@ export function getTrips() {
     }
 }
 
-//export function getTrip(id) {
-//    return function (dispatch, getState) {
-//        var state = getState();
-//        var url = "http://52.230.121.175/api/trip/" + id;
-//        dispatch(beginAjaxCall());
-//        return fetch(url)
-//            .then(function (result) {
-//                if (result.status === 200) {
-//                    return result.json();
-//                }
-//                throw "request failed";
-//            })
-//            .then(function (jsonResult) {
-//                dispatch(loadTripSuccess(jsonResult));
-//            })
-//            .catch(function (err) {
-//                dispatch(ajaxCallError());
-//                throw (err);
-//                // sweetAlert("Oops...", "Couldn't fetch repos for trip: " + state.trip, "error");
-//            });
-//    }
-//}
-
 
 export function deleteTrip(id, trips) {
     //    let id = event.target.id;
@@ -84,6 +68,7 @@ export function deleteTrip(id, trips) {
         dispatch(beginAjaxCall());
         return fetch(url, {
             method: "DELETE",
+            headers
         })
             .then(function (result) {
                 if (result.status === 200) {
@@ -123,10 +108,11 @@ export function saveTrip(trip) {
             if (!trip.enddate) delete trip.enddate;
             return fetch(url, {
                 method: "PATCH",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json'
+                // },
+                headers,
                 body: JSON.stringify(trip)
             })
                 .then(function (result) {
@@ -157,10 +143,11 @@ export function saveTrip(trip) {
 
             return fetch(url, {
                 method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json'
+                // },
+                headers,
                 body: JSON.stringify(trip)
             })
                 .then(function (result) {

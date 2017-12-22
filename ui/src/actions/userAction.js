@@ -4,7 +4,12 @@ import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 import toastr from 'toastr';
 import { ucs2 } from 'punycode';
 // import { start } from 'repl';
+import { getToken } from '../actions/localStoreAction';
 
+const headers = {
+    'x-access-token': getToken(), 'Accept': 'application/json',
+    'Content-Type': 'application/json'
+};
 
 export function loadUsersSuccess(users) {
     return { type: types.LOAD_USERS_SUCCESS, users };
@@ -32,7 +37,7 @@ export function getUsers() {
         var state = getState();
         var url = "http://52.230.121.175/api/users";
         dispatch(beginAjaxCall());
-        return fetch(url)
+        return fetch(url,{headers})
             .then(function (result) {
                 if (result.status === 200) {
                     return result.json();
@@ -50,29 +55,6 @@ export function getUsers() {
     }
 }
 
-//export function getUser(id) {
-//    return function (dispatch, getState) {
-//        var state = getState();
-//        var url = "http://52.230.121.175/api/user/" + id;
-//        dispatch(beginAjaxCall());
-//        return fetch(url)
-//            .then(function (result) {
-//                if (result.status === 200) {
-//                    return result.json();
-//                }
-//                throw "request failed";
-//            })
-//            .then(function (jsonResult) {
-//                dispatch(loadUserSuccess(jsonResult));
-//            })
-//            .catch(function (err) {
-//                dispatch(ajaxCallError());
-//                throw (err);
-//                // sweetAlert("Oops...", "Couldn't fetch repos for user: " + state.user, "error");
-//            });
-//    }
-//}
-
 
 export function deleteUser(id, users) {
     //    let id = event.target.id;
@@ -84,6 +66,7 @@ export function deleteUser(id, users) {
         dispatch(beginAjaxCall());
         return fetch(url, {
             method: "DELETE",
+            headers
         })
             .then(function (result) {
                 if (result.status === 200) {
@@ -121,10 +104,11 @@ export function saveUser(user) {
             if (!user.password) delete user.password;
             return fetch(url, {
                 method: "PATCH",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json'
+                // },
+                headers,
                 body: JSON.stringify(user)
             })
                 .then(function (result) {
@@ -155,10 +139,11 @@ export function saveUser(user) {
 
             return fetch(url, {
                 method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json'
+                // },
+                headers,
                 body: JSON.stringify(user)
             })
                 .then(function (result) {
@@ -184,11 +169,4 @@ export function saveUser(user) {
         }
     };
 }
-        // return function (dispatch) {
-        //     dispatch(beginAjaxCall());
-        //     return userApi.getAllUsers().then(users => {
-        //         dispatch(loadUsersSuccess(users));
-        //     }).catch(error => {
-        //         throw (error);
-        //     });
-        // };
+       

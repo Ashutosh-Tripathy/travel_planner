@@ -22,6 +22,7 @@ module.exports = (router, db) => {
     router.get('/trip/:id', (req, res) => {
         const id = req.params.id;
         logger(2, `Get trip: ${id}`);
+        logger(2, `Token: ${req.headers['x-access-token']}`);
         let condition = req.role == 'admin' ? { id: id } : { id: id, user_id: req.userId };
         db.trips.find({
             where: condition
