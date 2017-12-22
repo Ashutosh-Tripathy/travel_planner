@@ -118,9 +118,9 @@ export function saveTrip(trip) {
         if (trip.id) {
             url += "/" + trip.id;
             console.log(`Patch trip: ${trip.id}, url: ${url}, destination: ${trip.destination}, startdate: ${trip.startdate}, enddate: ${trip.enddate}`);
-            if (! trip.destination) delete trip.destination;
-            if (! trip.startdate) delete trip.startdate;
-            if (! trip.enddate) delete trip.enddate;
+            if (!trip.destination) delete trip.destination;
+            if (!trip.startdate) delete trip.startdate;
+            if (!trip.enddate) delete trip.enddate;
             return fetch(url, {
                 method: "PATCH",
                 headers: {
@@ -171,7 +171,7 @@ export function saveTrip(trip) {
                 })
                 .then(function (jsonResult) {
                     debugger;
-		    let trips = JSON.parse(JSON.stringify(state.trips));
+                    let trips = JSON.parse(JSON.stringify(state.trips));
                     trips.push(jsonResult);
                     dispatch(createTripSuccess(trips));
                     toastr.success('Successfuly created trip.');

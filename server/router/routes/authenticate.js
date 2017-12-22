@@ -2,7 +2,7 @@
 import logger from '../../logging/logger';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {SECRET} from '../../config/env';
+import { SECRET } from '../../config/env';
 
 const saltRounds = 2;
 
@@ -25,7 +25,7 @@ module.exports = (router, db) => {
     db.users.findOne({ where: { name: req.body.username } })
       .then(user => {
         if (!user) {
-	  res.status(400).json({ success: false, message: 'Invalid username/password.' });
+          res.status(400).json({ success: false, message: 'Invalid username/password.' });
         } else if (user) {
 
           bcrypt.compare(req.body.password, user.password)

@@ -9,7 +9,7 @@ module.exports = (router, db) => {
     router.get('/users', (req, res) => {
         db.users.findAll()
             .then(users => {
-		users.map(user => user.password = '');
+                users.map(user => user.password = '');
                 res.status(200).json(users);
             })
             .catch(err => {
@@ -22,12 +22,12 @@ module.exports = (router, db) => {
     router.get('/user/:id', (req, res) => {
         const id = req.params.id;
         logger(2, `Get user: ${id}`);
-       db.users.find({
+        db.users.find({
             where: { id: id }
             //attributes: { exclude: ['password'] }
         })
             .then(user => {
-		if(user) user.password = '';
+                if (user) user.password = '';
                 res.status(200).json(user);
             });
     });
@@ -38,13 +38,13 @@ module.exports = (router, db) => {
         const name = req.body.name;
         const textpassword = req.body.password;
         const role = req.body.role;
-	logger(2, `Patch user: ${id}, name: ${name}, password: ${textpassword}, role: ${role}`);
+        logger(2, `Patch user: ${id}, name: ${name}, password: ${textpassword}, role: ${role}`);
 
-	 bcrypt.hash(textpassword, saltRounds)
+        bcrypt.hash(textpassword, saltRounds)
             .then(password => {
                 db.users.create({ name, password, role })
                     .then(newuser => {
-			newuser.password = '';
+                        newuser.password = '';
                         res.status(200).json(newuser);
                     });
             });
@@ -53,26 +53,26 @@ module.exports = (router, db) => {
     // PATCH single user
     router.patch('/user/:id', (req, res) => {
         const id = req.params.id;
-	const name = req.body.name;
+        const name = req.body.name;
         const textpassword = req.body.password;
         const role = req.body.role;
-	logger(2, `Patch user: ${id}, name: ${name}, password: ${textpassword}, role: ${role}`);
-	logger(2, req.body);
-	if (textpassword){
-	bcrypt.hash(textpassword, saltRounds)
-            .then(password => {
-                db.users.update({ name, password, role }, { where: { id: id } })
-                    .then(updatedUser => {
-                        updatedUser.password = '';
-                        res.status(200).json(updatedUser);
-                    });
-            });
-	} else {
-		db.users.update({ name, role }, { where: { id: id } })
-                    .then(updatedUser => {
-                        updatedUser.password = '';
-                        res.status(200).json(updatedUser);
-                    });	
+        logger(2, `Patch user: ${id}, name: ${name}, password: ${textpassword}, role: ${role}`);
+        logger(2, req.body);
+        if (textpassword) {
+            bcrypt.hash(textpassword, saltRounds)
+                .then(password => {
+                    db.users.update({ name, password, role }, { where: { id: id } })
+                        .then(updatedUser => {
+                            updatedUser.password = '';
+                            res.status(200).json(updatedUser);
+                        });
+                });
+        } else {
+            db.users.update({ name, role }, { where: { id: id } })
+                .then(updatedUser => {
+                    updatedUser.password = '';
+                    res.status(200).json(updatedUser);
+                });
         }
 
     });
@@ -80,7 +80,7 @@ module.exports = (router, db) => {
     // DELETE single user
     router.delete('/user/:id', (req, res) => {
         const id = req.params.id;
-	logger(2, `Delete user: ${id}`);
+        logger(2, `Delete user: ${id}`);
         db.users.destroy({
             where: { id: id }
         })

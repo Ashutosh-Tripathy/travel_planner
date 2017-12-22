@@ -118,7 +118,7 @@ export function saveUser(user) {
         if (user.id) {
             url += "/" + user.id;
             console.log(`Patch user: ${user.id}, url: ${url}, name: ${user.name}, password: ${user.password}, role: ${user.role}`);
-            if (! user.password) delete user.password;
+            if (!user.password) delete user.password;
             return fetch(url, {
                 method: "PATCH",
                 headers: {
@@ -169,7 +169,7 @@ export function saveUser(user) {
                 })
                 .then(function (jsonResult) {
                     debugger;
-		    let users = JSON.parse(JSON.stringify(state.users));
+                    let users = JSON.parse(JSON.stringify(state.users));
                     users.push(jsonResult);
                     dispatch(createUserSuccess(users));
                     toastr.success('Successfuly created user.');

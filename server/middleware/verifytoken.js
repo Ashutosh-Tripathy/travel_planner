@@ -1,7 +1,7 @@
 'use strict';
 import logger from '../logging/logger';
 import jwt from 'jsonwebtoken';
-import {secret} from '../config/env';
+import { secret } from '../config/env';
 
 
 var unsecured_path = ['/authenticate'];

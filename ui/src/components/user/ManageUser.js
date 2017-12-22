@@ -50,7 +50,7 @@ class ManageUser extends React.Component {
             <UserForm user={this.state.user}
                 onChange={this.updateUserState} onSave={this.saveUser} errors={this.state.errors}
                 saving={this.state.saving} errors={this.state.errors || {}} />
-        );
+        ); this.setState({ saving: false });
     }
 }
 

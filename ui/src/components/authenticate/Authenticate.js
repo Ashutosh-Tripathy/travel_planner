@@ -14,10 +14,10 @@ toastr.options.preventDuplicates = true;
 class Authenticate extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {authenticateUser: {username: '', password: '', saving: false, errors: {}} };
+        this.state = { authenticateUser: { username: '', password: '', saving: false, errors: {} } };
         this.redirectToTripsrPage = this.redirectToTripsrPage.bind(this);
-	this.authenticateUser = this.authenticateUser.bind(this);
-	this.updateState = this.updateState.bind(this);
+        this.authenticateUser = this.authenticateUser.bind(this);
+        this.updateState = this.updateState.bind(this);
     }
 
 
@@ -25,16 +25,16 @@ class Authenticate extends React.Component {
     }
 
     redirectToTripsrPage() {
-	this.setState({ saving: false });
+        this.setState({ saving: false });
         browserHistory.push('/trips');
     }
 
 
-    updateState(event){
+    updateState(event) {
         const field = event.target.name;
         let authenticateUser = Object.assign({}, this.state.authenticateUser);
         authenticateUser[field] = event.target.value;
-        return this.setState({authenticateUser });
+        return this.setState({ authenticateUser });
     }
 
     authenticateUser(event) {
@@ -51,21 +51,21 @@ class Authenticate extends React.Component {
     render() {
         const { username, password, saving, errors } = this.state.authenticateUser;
         return (
-<form>
-            <h1>Please login</h1>
-            <div className="col-md-6 col-lg-6">
-                <TextInput name="username" label="Username" value={username} onChange={this.updateState}
-                    error={errors.title} />
+            <form>
+                <h1>Please login</h1>
+                <div className="col-md-6 col-lg-6">
+                    <TextInput name="username" label="Username" value={username} onChange={this.updateState}
+                        error={errors.title} />
 
 
-                <PasswordInput name="password" label="Password" value={password} onChange={this.updateState}
-                    defaultOption="Password" error={errors.authorId} />
-                <input
-                    type="submit" disabled={saving} value={saving ? 'wait...' : 'Login'}
-                    className="btn btn-primary"
-                    onClick={this.authenticateUser} />
-            </div>
-        </form>
+                    <PasswordInput name="password" label="Password" value={password} onChange={this.updateState}
+                        defaultOption="Password" error={errors.authorId} />
+                    <input
+                        type="submit" disabled={saving} value={saving ? 'wait...' : 'Login'}
+                        className="btn btn-primary"
+                        onClick={this.authenticateUser} />
+                </div>
+            </form>
         );
     }
 }
@@ -80,7 +80,7 @@ Authenticate.contextTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-	//        users: state.users
+        //        users: state.users
     };
 }
 
