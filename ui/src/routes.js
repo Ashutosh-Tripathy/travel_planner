@@ -5,11 +5,15 @@ import User from './components/user/User';
 import Trip from './components/trip/Trip';
 import ManageUser from './components/user/ManageUser';
 import ManageTrip from './components/trip/ManageTrip';
+import Authenticate from './components/authenticate/Authenticate';
+
 
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={User} />
-        <Route path="user" component={ManageUser} />
+	<Route path="user" component={ManageUser} />
+
+        <Route path="authenticate" component={Authenticate} />
         <Route path="user" component={ManageUser} />
         <Route path="user/:id" component={ManageUser} />
         <Route path="users" component={User} />

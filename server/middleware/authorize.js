@@ -6,9 +6,14 @@ export default function permit(...allowed) {
 
   // return a middleware
   return (req, res, next) => {
-    if ((req.params.id || req.body.id) == req.userId && isAllowed(req.role))
+    if (isAllowed(req.role)) { 
       next(); // role is allowed, so continue on the next middleware
-    else {
+    } else if (req.path.toLowerCase().startsWith('user') && (req.params.id || req.body.id) == req.userId) {
+      next();
+    } else if (req.path.toLowerCase().startsWith('trip')) {
+      next();
+    }
+ else {
       res.status(403).json({ message: "Forbidden" }); // user is forbidden
     }
   }

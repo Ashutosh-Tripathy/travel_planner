@@ -5,7 +5,10 @@ module.exports = (router, db) => {
 
     // GET all trips
     router.get('/trips', (req, res) => {
-        db.trips.findAll()
+	let condition = req.role == 'admin'? {}: {user_id: req.userId};
+        db.trips.findAll({
+		where: condition
+	})
             .then(trips => {
                 res.status(200).json(trips);
             })
@@ -19,11 +22,13 @@ module.exports = (router, db) => {
     router.get('/trip/:id', (req, res) => {
         const id = req.params.id;
         logger(2, `Get trip: ${id}`);
+	let condition = req.role == 'admin'? {id: id}: {id: id, user_id: req.userId};
         db.trips.find({
-            where: { id: id }
+            where: condition
         })
-            .then(trip => {
-                res.status(200).json(trip);
+            .then(trip => {		
+                if(!trip) return res.status(403).json({ message: "Forbidden" });
+		res.status(200).json(trip);
             });
     });
 
@@ -32,7 +37,7 @@ module.exports = (router, db) => {
         const destination = req.body.destination;
         const startdate = req.body.startdate;
         const enddate = req.body.enddate;
-        const user_id = req.body.user_id;
+        const user_id =  req.role == 'admin'? req.body.user_id: req.userId;
         db.trips.create({
             destination, startdate, enddate, user_id
         })
@@ -49,10 +54,12 @@ module.exports = (router, db) => {
     router.patch('/trip/:id', (req, res) => {
         const id = req.params.id;
         const updates = req.body;
+	let condition = req.role == 'admin'? {id: id}: {id: id, user_id: req.userId};
         db.trips.find({
-            where: { id: id }
+            where: condition
         })
             .then(trip => {
+		if(!trip) return res.status(403).json({ message: "Forbidden" });
                 return trip.updateAttributes(updates)
             })
             .then(updatedtrip => {
@@ -63,10 +70,12 @@ module.exports = (router, db) => {
     // DELETE single trip
     router.delete('/trip/:id', (req, res) => {
         const id = req.params.id;
+	let condition = req.role == 'admin'? {id: id}: {id: id, user_id: req.userId};
         db.trips.destroy({
-            where: { id: id }
+            where: condition 
         })
             .then(deletedtrip => {
+		if(!deletedtrip) return res.status(403).json({ message: "Forbidden" });
                 res.status(200).json(deletedtrip);
             });
     });
