@@ -34,6 +34,10 @@ module.exports = (router, db) => {
                     user.password = '';
                     res.status(200).json(user);
                 }
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 
@@ -51,7 +55,15 @@ module.exports = (router, db) => {
                     .then(newuser => {
                         newuser.password = '';
                         res.status(200).json(newuser);
+                    })
+                    .catch(err => {
+                        logger(0, err);
+                        res.status(500).json({ message: 'Unsuccessful, Please try again.' });
                     });
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 
@@ -70,13 +82,25 @@ module.exports = (router, db) => {
                         .then(updatedUser => {
                             updatedUser.password = '';
                             res.status(200).json(updatedUser);
+                        })
+                        .catch(err => {
+                            logger(0, err);
+                            res.status(500).json({ message: 'Unsuccessful, Please try again.' });
                         });
+                })
+                .catch(err => {
+                    logger(0, err);
+                    res.status(500).json({ message: 'Unsuccessful, Please try again.' });
                 });
         } else {
             db.users.update({ name, role }, { where: { id: id } })
                 .then(updatedUser => {
                     updatedUser.password = '';
                     res.status(200).json(updatedUser);
+                })
+                .catch(err => {
+                    logger(0, err);
+                    res.status(500).json({ message: 'Unsuccessful, Please try again.' });
                 });
         }
 
@@ -91,6 +115,10 @@ module.exports = (router, db) => {
         })
             .then(deleteduser => {
                 res.status(200).json(deleteduser);
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 };

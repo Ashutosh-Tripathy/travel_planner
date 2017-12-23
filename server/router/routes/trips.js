@@ -30,6 +30,10 @@ module.exports = (router, db) => {
             .then(trip => {
                 if (!trip) return res.status(403).json({ message: "Forbidden" });
                 res.status(200).json(trip);
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 
@@ -65,6 +69,10 @@ module.exports = (router, db) => {
             })
             .then(updatedtrip => {
                 res.status(200).json(updatedtrip);
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 
@@ -78,6 +86,10 @@ module.exports = (router, db) => {
             .then(deletedtrip => {
                 if (!deletedtrip) return res.status(403).json({ message: "Forbidden" });
                 res.status(200).json(deletedtrip);
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 };

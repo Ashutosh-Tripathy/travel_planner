@@ -55,8 +55,9 @@ class Authenticate extends React.Component {
         const { username, password, saving, errors } = this.state.authenticateUser;
         return (
             <form>
+                <div class="container">
                 <h1>Please login</h1>
-                <div className="col-md-6 col-lg-6">
+                <div className="col-md-8 col-lg-8 row">
                     <TextInput name="username" label="Username" value={username} onChange={this.updateState}
                         error={errors.title} />
 
@@ -67,6 +68,14 @@ class Authenticate extends React.Component {
                         type="submit" disabled={saving} value={saving ? 'wait...' : 'Login'}
                         className="btn btn-primary"
                         onClick={this.authenticateUser} />
+                </div>
+                <div className="row">
+                    <br/><br/>
+                </div>
+                <div className="col-md-8 col-lg-8 row">
+                    <a class="text-info" href="#" onclick="alert('Please contact your admin to create account for you.')">Signup</a> &nbsp;&nbsp;
+                    <a class="text-info" href="#" onclick="alert('Please contact you admin to reset your password.');">Forgot password?</a>
+                </div>
                 </div>
             </form>
         );

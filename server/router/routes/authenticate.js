@@ -6,18 +6,6 @@ import { SECRET } from '../../config/env';
 
 const saltRounds = 2;
 
-
-//bcrypt.hash(myPlaintextPassword, saltRounds).then(function (hash) {
-// Store hash in your password DB.
-//});
-
-
-//bcrypt.compare(myPlaintextPassword, hash).then(function (res) {
-// res == true
-//})
-
-
-
 module.exports = (router, db) => {
     // Post authenticate
     router.post('/authenticate', (req, res) => {
@@ -54,8 +42,16 @@ module.exports = (router, db) => {
                                     user: user
                                 });
                             }
+                        })
+                        .catch(err => {
+                            logger(0, err);
+                            res.status(500).json({ message: 'Unsuccessful, Please try again.' });
                         });
                 }
+            })
+            .catch(err => {
+                logger(0, err);
+                res.status(500).json({ message: 'Unsuccessful, Please try again.' });
             });
     });
 };
