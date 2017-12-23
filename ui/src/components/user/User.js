@@ -18,6 +18,11 @@ class User extends React.Component {
         this.redirectToAddUserPage = this.redirectToAddUserPage.bind(this);
     }
 
+    componentDidMount() {
+        this.props.actions.getUsers();
+    }
+
+
     componentWillReceiveProps(nextProps) {
         this.setState(() => ({ users: nextProps.users }));
     }

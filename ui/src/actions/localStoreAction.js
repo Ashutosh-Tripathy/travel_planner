@@ -24,8 +24,10 @@ const getUserInfo = () => {
 
 export const setUserInfo = (info) => {
     try {
-        info.user.isAdmin = info.user.role == 'admin';
-        info.user.isManager = info.user.role == 'manager';
+        if (info.user) {
+            info.user.isAdmin = info.user.role == 'admin';
+            info.user.isManager = info.user.role == 'manager';
+        }
         userInfo = info;
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
     } catch (err) {

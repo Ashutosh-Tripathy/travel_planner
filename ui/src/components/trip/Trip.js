@@ -12,15 +12,22 @@ toastr.options.preventDuplicates = true;
 class Trip extends React.Component {
     constructor(props, context) {
         super(props, context);
+        const user = getUser();
         this.state = {
             trips: this.props.trips || []
         };
         this.initialState = { trips: [] };
         this.deleteTrip = this.deleteTrip.bind(this);
         this.redirectToAddTripPage = this.redirectToAddTripPage.bind(this);
-        toastr.success(JSON.stringify(getUser()));
+        //toastr.success(JSON.stringify(getUser()));
+        console.log(JSON.stringify(getUser()));
+        console.log(JSON.stringify(getToken()));
     }
 
+
+    componentDidMount() {
+        this.props.actions.getTrips();
+    }
     componentWillReceiveProps(nextProps) {
         this.setState(() => ({ trips: nextProps.trips }));
     }

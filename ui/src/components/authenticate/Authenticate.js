@@ -6,7 +6,7 @@ import toastr from 'toastr';
 import * as authenticateUserAction from '../../actions/authenticateUserAction';
 import TextInput from '../common/TextInput';
 import PasswordInput from '../common/PasswordInput';
-
+import { setUserInfo, getUser } from '../../actions/localStoreAction'
 
 
 toastr.options.preventDuplicates = true;
@@ -14,6 +14,7 @@ toastr.options.preventDuplicates = true;
 class Authenticate extends React.Component {
     constructor(props, context) {
         super(props, context);
+        setUserInfo({});
         this.state = { authenticateUser: { username: '', password: '', saving: false, errors: {} } };
         this.redirectToTripsrPage = this.redirectToTripsrPage.bind(this);
         this.authenticateUser = this.authenticateUser.bind(this);
@@ -26,8 +27,10 @@ class Authenticate extends React.Component {
 
     redirectToTripsrPage() {
         this.setState({ saving: false });
-        browserHistory.push('/trips');
-    }
+//        browserHistory.push('/trips');
+        this.context.router.push('/trips');
+        toastr.success(`Welcome!!! `);
+   }
 
 
     updateState(event) {
@@ -41,7 +44,7 @@ class Authenticate extends React.Component {
         event.preventDefault();
         this.setState({ saving: true });
         this.props.actions.authenticateUser(this.state.authenticateUser)
-            .then(() => this.redirectToTripsrPage())
+            .then(this.redirectToTripsrPage())
             .catch((error) => {
                 toastr.error(error);
                 this.setState({ saving: false });

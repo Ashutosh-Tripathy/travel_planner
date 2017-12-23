@@ -3,8 +3,12 @@ import TextInput from '../common/TextInput';
 import DateInput from '../common/DateInput';
 import SelectInput from '../common/SelectInput';
 import NumberInput from '../common/NumberInput';
+import { getUser } from '../../actions/localStoreAction';
+
 
 const TripForm = ({ trip, onSave, onChange, saving, errors }) => {
+    var userIdInput = getUser().isAdmin ? <NumberInput name="user_id" label="User id" value={trip.user_id} onChange={onChange} defaultOption="End Date" error={errors.authorId} readonly={trip.user_id > 0} /> : '';
+
     return (
         <form>
             <h1>Manage Trip</h1>
@@ -19,9 +23,7 @@ const TripForm = ({ trip, onSave, onChange, saving, errors }) => {
                 <DateInput name="enddate" label="End Date" value={trip.enddate} onChange={onChange}
                     defaultOption="End Date" error={errors.authorId} />
 
-		<NumberInput name="user_id" label="User id" value={trip.user_id} onChange={onChange}
-			defaultOption="End Date" error={errors.authorId} readonly={trip.user_id > 0} />
-    
+                {userIdInput}
                 <input
                     type="submit" disabled={saving} value={saving ? 'saving...' : 'Save'}
                     className="btn btn-primary"

@@ -14,10 +14,8 @@ import { getTrips } from './actions/tripAction';
 import '../node_modules/toastr/build/toastr.min.css';
 
 const store = configureStore();
-store.dispatch(getUsers());
-store.dispatch(getTrips());
-// store.dispatch(loadCourses());
-// store.dispatch(loadAuthors());
+//store.dispatch(getUsers());
+//store.dispatch(getTrips());
 
 render(
     <Provider store={store}>

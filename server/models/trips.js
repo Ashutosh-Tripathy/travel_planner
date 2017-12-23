@@ -1,41 +1,41 @@
 import users from './users';
 
 const trip = (sequelize, DataTypes) => {
-  const tbl = sequelize.define('trip', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    destination: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      length: 50,
-    },
-    startdate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      defaultValue: DataTypes.NOW 
-    },
-    enddate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      defaultValue: DataTypes.NOW 
-    },
-    //user_id: {
-    //	type: DataTypes.INTEGER, references: users, referencesKey: "id"
-    //  },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updated_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
-  }, {
-      paranoid: true,
-      underscored: true
-    });
-  return tbl;
+    const tbl = sequelize.define('trip', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        destination: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            length: 50,
+        },
+        startdate: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+        },
+        enddate: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+        },
+        //user_id: {
+        //	type: DataTypes.INTEGER, references: users, referencesKey: "id"
+        //  },
+        created_at: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updated_at: DataTypes.DATE,
+        deleted_at: DataTypes.DATE
+    }, {
+            paranoid: true,
+            underscored: true
+        });
+    return tbl;
 };
 
 // const tripModel = db.define('trip', {

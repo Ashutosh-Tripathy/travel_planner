@@ -7,7 +7,7 @@ module.exports = (router, db) => {
 
     // GET all users
     router.get('/users', (req, res) => {
-	logger(2, `Token: ${req.headers['x-access-token']}`);
+        logger(2, `Token: ${req.headers['x-access-token']}`);
         db.users.findAll()
             .then(users => {
                 users.map(user => user.password = '');
@@ -28,8 +28,12 @@ module.exports = (router, db) => {
             //attributes: { exclude: ['password'] }
         })
             .then(user => {
-                if (user) user.password = '';
-                res.status(200).json(user);
+                if (!user) {
+                    res.status(404).json({ message: 'resource not found' });
+                } else {
+                    user.password = '';
+                    res.status(200).json(user);
+                }
             });
     });
 

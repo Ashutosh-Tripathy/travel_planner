@@ -37,7 +37,7 @@ export function getUsers() {
         var state = getState();
         var url = "http://52.230.121.175/api/users";
         dispatch(beginAjaxCall());
-        return fetch(url,{headers})
+        return fetch(url, { headers })
             .then(function (result) {
                 if (result.status === 200) {
                     return result.json();
@@ -169,4 +169,4 @@ export function saveUser(user) {
         }
     };
 }
-       
+
