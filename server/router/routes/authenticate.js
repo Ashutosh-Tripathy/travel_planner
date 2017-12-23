@@ -46,11 +46,12 @@ module.exports = (router, db) => {
                 var token = jwt.sign(payload, SECRET, {
                   expiresIn: 30 * 24 * 60 * 60 // expires in 24 hours
                 });
-
+		user.password = '';
                 // return the information including token as JSON
                 res.status(200).json({
                   success: true,
-                  token: token
+                  token: token,
+		  user: user
                 });
               }
             });

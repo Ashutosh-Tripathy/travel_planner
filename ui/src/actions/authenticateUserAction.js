@@ -3,7 +3,7 @@ import userApi from '../api/userApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 import toastr from 'toastr';
 import { ucs2 } from 'punycode';
-import { setToken } from './localStoreAction';
+import { setUserInfo } from './localStoreAction';
 // import { start } from 'repl';
 
 
@@ -46,8 +46,8 @@ export function authenticateUser(user) {
                 throw "request failed";
             })
             .then(function (jsonResult) {
-                toastr.success(JSON.stringify(jsonResult));
-                setToken(jsonResult.token);
+                //toastr.success(JSON.stringify(jsonResult));
+		setUserInfo(jsonResult);
                 toastr.success(`Welcome ${user.username}`);
 
                 // dispatch(deleteUserSuccess(jsonResult));

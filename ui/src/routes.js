@@ -17,7 +17,7 @@ function requireAuth(nextState, replace) {
 }
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={User} onEnter={requireAuth} />
+        <IndexRoute component={Trip} onEnter={requireAuth} />
         <Route path="user" component={ManageUser} />
 
         <Route path="authenticate" component={Authenticate} />
