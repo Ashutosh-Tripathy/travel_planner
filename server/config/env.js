@@ -1,4 +1,5 @@
 'use strict';
+import path from 'path';
 
 const env = {
     PORT: process.env.PORT || 8080,
@@ -11,7 +12,7 @@ const env = {
     DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'sqlite',
 
     NODE_ENV: process.env.NODE_ENV || 'development',
-    DATABASE_PATH: process.env.DATABASE_PATH || '/home/ashugreenworld/db/travel_planner.sqlite',
+    DATABASE_PATH: process.env.DATABASE_PATH || path.resolve(__dirname) +  '/travel_planner.sqlite',
     SECRET: 'APPSECRET'
 };
 

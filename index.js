@@ -17,8 +17,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(verifytoken);
-app.use(authorize);
+//app.use(verifytoken);
+//app.use(authorize);
 //app.use("/user*", authorize("admin", "manager"));
 //app.use("/trip*", authorize("admin"));
 

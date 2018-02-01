@@ -29,7 +29,11 @@ db.trips = trips(sequelize, Sequelize);
 //Task.belongsTo(User, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 //User.hasMany(Task, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 
-db.trips.belongsTo(db.users, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-db.users.hasMany(db.trips, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+//db.trips.belongsTo(db.users, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+//db.users.hasMany(db.trips, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+
+db.trips.belongsTo(db.users, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+db.users.hasMany(db.trips, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+
 
 module.exports = db;
