@@ -11,7 +11,7 @@ const env = {
     DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'sqlite',
 
     NODE_ENV: process.env.NODE_ENV || 'development',
-    DATABASE_PATH: process.env.DATABASE_PATH || '/home/ashugreenworld/db/travel_planner.sqlite',
+    DATABASE_PATH: process.env.DATABASE_PATH || '../../db/travel_planner.sqlite',
     SECRET: 'APPSECRET'
 };
 
