@@ -39,10 +39,8 @@ module.exports = (router, db) => {
 
     // POST single trip
     router.post('/trip', (req, res) => {
-        const destination = req.body.destination;
-        const startdate = req.body.startdate;
-        const enddate = req.body.enddate;
-        const user_id = req.role == 'admin' ? req.body.user_id : req.userId;
+        const {destination, startdate, enddate, user_id } = req.body;
+//        const user_id = req.role == 'admin' ? req.body.user_id : req.userId;
         db.trips.create({
             destination, startdate, enddate, user_id
         })
